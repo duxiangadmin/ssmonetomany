@@ -1,0 +1,37 @@
+以下是spring 4.1.2版本的正确配置
+
+<----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+在springmvc配置
+4.1.2的
+
+<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" /><!-- json转换器 -->
+			</list>
+		</property>
+	</bean>
+
+引入三个jackson2.4版本
+如下:
+
+jackson-core-2.4.1.jar
+
+jackson-annotations-2.4.1.jar
+
+jackson-databind-2.4.1.jar
+
+问题就解决了,不在报406了,json数据出来了

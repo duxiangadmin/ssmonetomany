@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itlaiba.ssm.mybatis.onetomany.mapper.RoleMapper">
+	<resultMap type="role" id="baseResult">
+		<id column="roleid" property="rid"/>
+		<result column="rolename" property="rname"/>
+		<!-- 这里是配置的一对多，对于一的一方有多个另一方（一个账号有多个角色）
+			property：指的是你在一的一方中配置的哪个代表多的一方的属性名（list的属性名）
+			ofType：是具体的类型（list中的类型）
+		 -->
+		<collection property="users" ofType="user">
+			<id column="uid" property="uid"/>
+			<result column="username" property="uname"/>
+			<result column="password" property="address"/>
+		</collection>
+	</resultMap>
+	
+
+	<!-- <select id="select" resultMap="baseResult">
+		select * from t_role
+	</select> -->
+	
+	<select id="select" resultMap="baseResult">
+		select r.rolename from t_role r,t_user u where u.roleid=r.roleid and u.username = "admin"
+	</select>
+	
+</mapper>

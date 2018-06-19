@@ -1,0 +1,2 @@
+org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): com.taotao.mapper.TbItemMapper.selectByExample  找不到mapper映射文件
+在maven中的分层中，需要加入
